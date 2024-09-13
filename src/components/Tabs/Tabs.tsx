@@ -1,6 +1,7 @@
 export default function Tabs({children,buttons, buttonsContainer}:any) {
+    const ButtonsConstainer = buttonsContainer
     return <>
-            <menu>{buttons}</menu>
+            <ButtonsConstainer>{buttons}</ButtonsConstainer>
             {children}
         </>
 
