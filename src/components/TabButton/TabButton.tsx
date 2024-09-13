@@ -3,16 +3,15 @@ import './TabButton.css'
 
 type Props = {
     children: React.ReactNode;
-    onSelect: () => void;
     isSelected: boolean;
 }
 
-const TabButton = ({children, onSelect, isSelected}: Props) => {      //* Alternative (props)  props.children , props.onSelect
+const TabButton = ({children, isSelected, ...props}: any) => {      //* Alternative (props)  props.children , props.onSelect
     return (
         <li>
             <button
                 className={isSelected ? 'active' : undefined}
-                onClick={onSelect}>
+                {...props}>
                 {children}
             </button>
         </li>

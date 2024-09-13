@@ -1,6 +1,8 @@
 import TabButton from "../TabButton/TabButton";
 import {EXAMPLES} from "../../data";
 import React, {useState} from "react";
+import Section from "../Section/Section";
+import Tabs from "../Tabs/Tabs";
 
 enum EKEnum {
     COMPONENT = 'components',
@@ -17,6 +19,7 @@ const Examples = () => {
     //* useState return an array with 2 elements, first element is the current data snapshot, second element will be a function (State updating function) that will update the state
 
     const [selectedTopic, setSelectedTopic] = useState<EKEnum | undefined>();
+    let tabContent = ''
 
     function handleSelect(selectedButton: EKEnum): void {
         setSelectedTopic(selectedButton)
@@ -24,29 +27,37 @@ const Examples = () => {
     }
 
     return (
-        <section id="examples">
-            <menu>
-                <TabButton
-                    isSelected={selectedTopic === EKEnum.COMPONENT}
-                    onSelect={() => handleSelect(EKEnum.COMPONENT)}>
-                    Component
-                </TabButton>
-                <TabButton
-                    isSelected={selectedTopic === EKEnum.JSX}
-                    onSelect={() => handleSelect(EKEnum.JSX)}>
-                    JSX
-                </TabButton>
-                <TabButton
-                    isSelected={selectedTopic === EKEnum.PROPS}
-                    onSelect={() => handleSelect(EKEnum.PROPS)}>
-                    Props
-                </TabButton>
-                <TabButton
-                    isSelected={selectedTopic === EKEnum.STATE}
-                    onSelect={() => handleSelect(EKEnum.STATE)}>
-                    State
-                </TabButton>
-            </menu>
+
+        <Section title="Examples" id='examples'>
+            <Tabs
+                buttonsContainer='menu'
+                buttons={
+                    <>
+                        <TabButton
+                            isSelected={selectedTopic === EKEnum.COMPONENT}
+                            onClick={() => handleSelect(EKEnum.COMPONENT)}>
+                            Component
+                        </TabButton>
+                        <TabButton
+                            isSelected={selectedTopic === EKEnum.JSX}
+                            onClick={() => handleSelect(EKEnum.JSX)}>
+                            JSX
+                        </TabButton>
+                        <TabButton
+                            isSelected={selectedTopic === EKEnum.PROPS}
+                            onClick={() => handleSelect(EKEnum.PROPS)}>
+                            Props
+                        </TabButton>
+                        <TabButton
+                            isSelected={selectedTopic === EKEnum.STATE}
+                            onClick={() => handleSelect(EKEnum.STATE)}>
+                            State
+                        </TabButton>
+                    </>
+                }>
+                {tabContent}
+            </Tabs>
+
             {!selectedTopic ? <p>Please select a topic.</p> : (
                 <div id="tab-content">
                     <h3>{EXAMPLES[selectedTopic].title}</h3>
@@ -58,7 +69,7 @@ const Examples = () => {
                         </pre>
                 </div>
             )}
-        </section>
+        </Section>
     )
 }
 
